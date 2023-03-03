@@ -6,10 +6,25 @@ const result = document.getElementById("result");
 const controls = document.querySelector(".controls-container");
 const dragContainer = document.querySelector(".draggable-objects");
 const dropContainer = document.querySelector(".drop-points");
-const data = ["Caballo", "Vaca", "Oveja", "Gallo", "Gallina", "Pollito",
-              "Cerdo", "Burro", "Toro", "Pato"];
-
+const data = [
+    "Caballo",
+    "Vaca",
+    "Oveja",
+    "Gallo",
+    "Gallina",
+    "Pollito",
+    "Cerdo",
+    "Burro",
+    "Toro",
+    "Pato",
+];
 let count = 0;
+
+//Reproduccion de sonido
+let incorrecto = new Audio("sonidos/Incorrecto.wav");
+let victoria = new Audio("sonidos/Victoria.wav");
+
+//Reproduccion de sonido
 
 // Valor aleatorio para array
 const randomValueGenerator = () => {
@@ -25,14 +40,15 @@ const stopGame = () => {
 };
 
 // Funciones Drag & Drop
-function dragStart(e){
+function dragStart(e) {
     e.dataTransfer.setData("text", e.target.id);
 }
 
 // Eventos dragOver
-function dragOver(e){
+function dragOver(e) {
     e.preventDefault();
 }
+
 
 // Evento Drop
 const drop = (e) => {
@@ -51,17 +67,26 @@ const drop = (e) => {
         draggedElement.setAttribute("draggable", "false");
         e.target.innerHTML = ``;
         // insertar nuevo div
-        e.target.insertAdjacentHTML("afterbegin", `<div>${draggedElementData.toUpperCase()}</div>`);
+        e.target.insertAdjacentHTML(
+            "afterbegin",
+            `<div>${draggedElementData.toUpperCase()}</div>`
+        );
         count += 1;
+        animal = new Audio("sonidos/" + draggedElementData + ".wav");
+        animal.play();
+    }
+    else {
+        incorrecto.play();
     }
     // Ganar
-    if(count == 6){
-        result.innerText = `Ganaste!`;
-        stopGame();
+    if (count >= 6) {
+        setTimeout( function () {
+            victoria.play();
+            result.innerText = `¡Ganaste! Nombre del localstorage y puntuacion ¿Botón de ver clasificación o ir al menú o jugar otra vez?`;
+            stopGame();
+        }, 2000);
     }
-}
-
-
+};
 
 // Crea Animalitos y nombres
 const creator = () => {
@@ -69,11 +94,11 @@ const creator = () => {
     dropContainer.innerHTML = "";
     let randomData = [];
     // Para strings aleatorios en el vector
-    for (let i=1; i<=6; i++){
+    for (let i = 1; i <= 6; i++) {
         let randomValue = randomValueGenerator();
-        if(!randomData.includes(randomValue)){
+        if (!randomData.includes(randomValue)) {
             randomData.push(randomValue);
-        }else{
+        } else {
             // Si el valor a existe decrementa i en uno
             i -= 1;
         }
@@ -101,22 +126,25 @@ const creator = () => {
 };
 
 // Empezar juego
-startButton.addEventListener("click", (startGame = async () => {
-    controls.classList.add("hide");
-    startButton.classList.add("hide");
-    // Espera al creador
-    await creator();
-    count = 0;
+startButton.addEventListener(
+    "click",
+    (startGame = async () => {
+        controls.classList.add("hide");
+        startButton.classList.add("hide");
+        // Espera al creador
+        await creator();
+        count = 0;
 
-    dropPoints = document.querySelectorAll(".nom-animal");
-    draggableObjects = document.querySelectorAll(".draggable-name");
+        dropPoints = document.querySelectorAll(".nom-animal");
+        draggableObjects = document.querySelectorAll(".draggable-name");
 
-    // Eventos
-    draggableObjects.forEach((element) => {
-        element.addEventListener("dragstart",dragStart);
-    });
-    dropPoints.forEach((element) => {
-        element.addEventListener("dragover", dragOver);
-        element.addEventListener("drop", drop);
-    });
-}));
+        // Eventos
+        draggableObjects.forEach((element) => {
+            element.addEventListener("dragstart", dragStart);
+        });
+        dropPoints.forEach((element) => {
+            element.addEventListener("dragover", dragOver);
+            element.addEventListener("drop", drop);
+        });
+    })
+);
