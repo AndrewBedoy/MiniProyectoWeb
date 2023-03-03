@@ -5,11 +5,17 @@ body{
 
 
    #texto{
-    font-family: 'Rampart One';
-    font-size:large;
-    color: rgb(255, 255, 32);
-    text-align: center;
-    padding-top: 80px;
+    font-family: "Climate Crisis", cursive;
+  font-size: large;
+  text-shadow: 3px  1px 1px black,
+               1px  3px 1px black,
+              -3px  1px 1px black,
+               1px -3px 1px black;
+
+  color: rgb(255, 255, 32);
+  letter-spacing: 4px;
+  text-align: center;
+  padding-top: 80px;
    }
 
    #company{
@@ -24,6 +30,10 @@ body{
     display: block;
     margin-right: auto;
     margin-left: auto;
+    width: 40%;
+    font-weight: bold;
+    color: white;
+    font-size:x-large;
    }
 
    canvas{
