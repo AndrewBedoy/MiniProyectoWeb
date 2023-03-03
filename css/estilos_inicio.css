@@ -1,0 +1,35 @@
+body{
+    background-image: url("../img/granja.jpg");
+    background-size: cover;
+}
+
+
+   #texto{
+    font-family: 'Rampart One';
+    font-size:large;
+    color: rgb(255, 255, 32);
+    text-align: center;
+    padding-top: 80px;
+   }
+
+   #company{
+    margin: 0 auto;
+   }
+
+   #manzanita{
+    width: 70px;
+   }
+
+   #boton{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+   }
+
+   canvas{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 120px;
+   }
+
