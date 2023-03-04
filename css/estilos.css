@@ -5,14 +5,20 @@
     font-family: 'Tilt Neon', cursive;
 }
 
+h1, h2 {
+    color: white;
+}
+
 body {
-    background-color: #5372ef;    
+    background-color: #8399f0;     
 }
 
 .container{
     width: 90%;
     max-width: 75em;
-    background-color: #ffffff;
+    height: 75%;
+    background-image: url("../img/granja.jpg");
+    background-size: cover;
     padding: 3em 0.5em;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -20,6 +26,21 @@ body {
     left: 50%;
     border-radius: 0.8em;
 }
+
+.registro{
+    width: 90%;
+    max-width: 75em;
+    height: 75%;
+    background-image: url("../img/granja.jpg");
+    background-size: cover;
+    padding: 3em 0.5em;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 0.8em;
+}
+
 
 h3{
     text-align: center;
@@ -29,7 +50,7 @@ h3{
     font-weight: 600;
     letter-spacing: 0.03em;
     line-height: 1.8em;
-    color: #010c39;
+    color: #fcfcfc;
 }
 
 .draggable-objects, .drop-points{
@@ -52,6 +73,7 @@ h3{
     border-radius: 8em;
     text-align: center;
     text-transform: uppercase;
+    background-color: white;
 }
 
 .divAnimal{
@@ -85,12 +107,23 @@ img {
     justify-content: center;
     height: 100%;
     width: 100%;
-    background-color: #5372ef;
+    background-color: #8399f0; 
     flex-direction: column;
     top: 0;
 }
 
-.controls-container button{
+.control {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    position: absolute;
+    width: 10%;
+    height: 16%;
+    left: 85%;
+    top: 0;
+    margin: 25px;
+}
+
+.controls-container button, .container .control button {
     font-size: 1.12em;
     padding: 0.8em 1em;
     border-radius: 0.2em;
@@ -99,6 +132,12 @@ img {
     color: #010c39;
     letter-spacing: 0.06em;
     cursor: pointer;
+    width: 45%;
+}
+
+.container .control button:hover {
+    background-color: #010c39;
+    color: white;
 }
 
 .controls-container p{
