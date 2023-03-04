@@ -1,52 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Rampart+One&display=swap"
-        rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/estilos_inicio.css">
-    <script src="js/script_inicio.js"></script>
-
-    <title>La granja de la Tía Paola</title>
-</head>
-
-<body>
-    <audio src="media/A Day to Remember - FiftySounds.mp3" autoplay="true" id="cancion"></audio>
-
-    <div id="texto">
-        <table id="company">
-            <tr>
-                <td>
-                    <h1>Manzanita production's</h1>
-                </td>
-                <td>
-                    <img src="img/manzana.png" alt="" id="manzanita">
-                </td>
-            </tr>
-        </table>
-
-        <br>
-        <h1>Presenta</h1>
-        <br>
-        <h1>La granja de la Tía Paola</h1>
-
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h3>Arrastra y coloca el nombre a cada animalito de la granja</h3>
+      <div class="draggable-objects"></div>
+      <div class="drop-points"></div>
     </div>
-    
-    <section id="cajasoltar">
-        <canvas id="myCanvas" width="1300" height="100" ></canvas>
-    </section>
-    <script src="js/script_inicio.js" >
+    <div class="controls-container">
+      <button id="start">Comienza Juego</button>
+    </div>
 
-    </script>
-    <br>
-    <button type="button" class="btn btn-warning" onclick="location.href='inicio.html'" id="boton">¡Jugar!</button>
-   
-</body>
+    <div class="final-screen">
+        <canvas id="myCanvas"></canvas>
+        
+        <form class="registro">
+        <p>La puntuación final de "alias" es: </p>
+          <button type="submit">Guardar</button>
+          <button onclick="reiniciarJuego()">Jugar de nuevo</button>
+        </form>
+        
+      </div>
+    <!-- Script -->
+    <script src="js/script.js"></script>
+  </body>
 </html>

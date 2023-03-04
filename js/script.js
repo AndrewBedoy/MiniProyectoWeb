@@ -11,6 +11,8 @@ const tiempo = document.getElementById("cronometro");
 const controls = document.querySelector(".controls-container");
 const dragContainer = document.querySelector(".draggable-objects");
 const dropContainer = document.querySelector(".drop-points");
+const finalScreen = document.querySelector(".final-screen")
+finalScreen.classList.add("hide");
 const data = [
     "Caballo",
     "Vaca",
@@ -47,6 +49,8 @@ const randomValueGenerator = () => {
 // Pantalla de Ganador
 const stopGame = () => {
     controls.classList.remove("hide");
+    startButton.classList.remove("hide");
+    finalScreen.classList.remove("hide");
     setTimeout(function () {
         startButton.innerHTML = "Volver a jugar como " + document.getElementById("jugador").value;
         document.getElementById("score").classList.remove("hide");
@@ -115,6 +119,7 @@ const drop = (e) => {
             victoria.play();
             ganar.innerText = `¡Ganaste!`;
             stopGame();
+            victoria.play();
         }, 2000);
         setTimeout(function () {
             nombre.innerText = document.getElementById("jugador").value;
@@ -170,6 +175,8 @@ startButton.addEventListener(
         controls.classList.add("hide");
         document.getElementById("score").classList.add("hide");
         startButton.classList.add("hide");
+
+
         // Espera al creador
         await creator();
         count = 0;
@@ -194,6 +201,69 @@ startButton.addEventListener(
         puntajeRonda = 0;
     })
 );
+
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+
+// Establecer el ancho y alto del canvas
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// Establecer la fuente y el tamaño del texto
+ctx.font = "80px Arial";
+
+// Obtener el ancho y alto del texto
+const text = "Has Ganado!!! Felicidades";
+const textWidth = ctx.measureText(text).width;
+const textHeight = parseInt(ctx.font);
+
+// Definir la posición inicial del texto
+let x = canvas.width / 2 - textWidth / 2;
+let y = canvas.height / 2 - textHeight / 2;
+
+// Definir la cantidad de movimiento en cada dirección
+let dx = 5;
+let dy = 5;
+
+// Definir el gradiente de colores
+const gradient = ctx.createLinearGradient(x, y, x + textWidth, y);
+gradient.addColorStop(0, "red");
+gradient.addColorStop(0.2, "orange");
+gradient.addColorStop(0.4, "yellow");
+gradient.addColorStop(0.6, "green");
+gradient.addColorStop(0.8, "blue");
+gradient.addColorStop(1, "purple");
+
+// Función para animar el texto
+function animate() {
+  // Limpiar el canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Actualizar la posición del texto
+  x += dx;
+  y += dy;
+
+  // Invertir la dirección de movimiento si se llega al borde del canvas
+  if (x + textWidth >= canvas.width || x <= 0) {
+    dx = -dx;
+  }
+  if (y + textHeight >= canvas.height || y <= 0) {
+    dy = -dy;
+  }
+
+  // Aplicar el gradiente de colores como relleno para el texto
+  ctx.fillStyle = gradient;
+
+  // Dibujar el texto centrado
+  ctx.fillText(text, x, y);
+
+  // Solicitar la siguiente animación
+  requestAnimationFrame(animate);
+}
+
+// Iniciar la animación
+animate();
+
 
 function mostrarJuego() {
     let jugador = document.getElementById("jugador").value;
