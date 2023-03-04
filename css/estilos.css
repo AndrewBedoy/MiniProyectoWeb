@@ -5,6 +5,10 @@
     font-family: 'Tilt Neon', cursive;
 }
 
+h1, h2 {
+    color: white;
+}
+
 body {
     background-image: url("../img/granja.jpg");
 
@@ -35,7 +39,9 @@ body {
   justify-content: flex-end;
 }
 .container{
+.container, .registro{
     width: 90%;
+    height: 80%;
     max-width: 75em;
     background-image: url("../img/granja.jpg");
     background-size: cover;
@@ -55,7 +61,8 @@ h3{
     font-weight: 600;
     letter-spacing: 0.03em;
     line-height: 1.8em;
-    color: #010c39;
+    color: #fcfcfc;
+    text-shadow: 2px 2px 3px black;
 }
 
 .draggable-objects, .drop-points{
@@ -116,15 +123,66 @@ img {
     background-image: url("../img/granja.jpg");
 
     background-size: cover;
+    width: 90%;
+    height: 80%;
+    max-width: 75em;
+    background-size: cover;
+    padding: 3em 0.5em;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 0.8em;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#juego .controls-container {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+}
+
+.control {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    position: absolute;
+    width: 10%;
+    height: 16%;
+    left: 85%;
+    top: 0;
+    margin: 25px;
+}
+
+.controlPuntos {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    position: absolute;
+    width: 15%;
+    height: 8%;
+    left: 2%;
+    top: 0;
+    margin: 25px;
+}
+
+.difuminado {
+    -webkit-backdrop-filter: blur(50px);
+    backdrop-filter: blur(50px);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    max-width: 75em;
     padding: 3em 0.5em;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
     border-radius: 0.8em;
     position: fixed;
+    text-shadow: 2px 2px 3px black;
 }
 
-.controls-container button{
+.controls-container button, .container .control button {
     font-size: 1.12em;
     padding: 0.8em 1em;
     border-radius: 0.2em;
@@ -133,6 +191,12 @@ img {
     color: #010c39;
     letter-spacing: 0.06em;
     cursor: pointer;
+    width: 45%;
+}
+
+.container .control button:hover {
+    background-color: #010c39;
+    color: white;
 }
 
 .controls-container p{

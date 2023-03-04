@@ -10,8 +10,6 @@ function animacion() {
     if (pos_x == 1300) {
         pos_x = 0;
     }
-
-
 }
 
 window.onload = function () {
@@ -19,7 +17,7 @@ window.onload = function () {
     c = document.getElementById("myCanvas");
     ctx = c.getContext("2d");
     img = new Image();
-    img.src = "../img/Gallo copy.png";
+    img.src = "img/Gallo copy.png";
     ctx.drawImage(img, pos_x, 0);
     var can = document.getElementById("cancion");
     can.setAttribute("autoplay", true);
@@ -27,3 +25,5 @@ window.onload = function () {
 
     animacion();
 }
+
+

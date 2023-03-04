@@ -1,53 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Rampart+One&display=swap"
-        rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/estilos_inicio.css">
-    <script src="js/script_inicio.js"></script>
-
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+    <!-- Estilos --> 
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
-
 <body>
-    <audio src="media/A Day to Remember - FiftySounds.mp3" loop="3" autoplay="true"></audio>
-
-    <div id="texto">
-        <table id="company">
-            <tr>
-                <td>
-                    <h1>Manzanita production's</h1>
-                </td>
-                <td>
-                    <img src="img/manzana.png" alt="" id="manzanita">
-                </td>
-            </tr>
-        </table>
-
-        <br>
-        <h1>Presenta</h1>
-        <br>
-        <h1>La granja de la tia paola</h1>
-
+    <audio src="media/A Day to Remember - FiftySounds.mp3" autoplay="true" loop id="cancion"></audio>
+    <div id="registro">
+        <div class="registro text-center">
+            <div class="difuminado">
+                <h1>¡Hola!</h1>
+                <h2>Ingresa tu nombre aquí</h2>
+                <br>
+                <input type="text" class="text-bg-info" id="jugador">
+                <button onclick="mostrarJuego()">Aceptar</button>
+            </div>
+        </div>
     </div>
-    
-    <section id="cajasoltar">
-        <canvas id="myCanvas" width="1300" height="100" ></canvas>
-    </section>
-    <script src="js/script_inicio.js" >
+    <div id="juego" hidden>
+        <div class="container">
+            <div class="control">
+                <button onclick="controlarMusica()" id="controlMusica">
+                    <i id="iconoMusica" class="fa-solid fa-volume-high"></i>
+                </button>
+                <button onclick="terminarJuego()" id="controlMusica"><i class="fa-solid fa-circle-xmark"></i></button>
+                <h1 id="cronometro">00.00.00</h1>
+            </div>
+            <div class="controlPuntos text-center">
+                <h1 id="puntos">Puntos: 0</h1>
+                <h1 id="aciertoFallo"></h1>
+            </div>
+            <h3>Arrastra y coloca el nombre a cada animalito de la granja</h3>
+            <div class="draggable-objects"></div>
+            <div class="drop-points"></div>
+        </div>
+        <div class="controls-container">
+            <p id="ganar"></p>
+            <p id="nombre"></p>
+            <p id="puntuacion"></p>
 
-    </script>
-    <br>
-    <button type="button" class="btn btn-warning" onclick="location.href='index.html'" id="boton">Jugar!!</button>
-   
+            <button id="start">Comenzar juego</button>
+            <br>
+            <button id="score" onclick="cambiarPagina('scores.html')">Ver puntuaciones</button>
+            <br>
+            <button onclick='window.location.href="inicio.html"'>Cambiar usuario</button>
+        </div>
+    </div>
+    <!-- Script -->
+    <script src="https://kit.fontawesome.com/ade620492b.js" crossorigin="anonymous"></script>
+    <script src="js/musica.js"></script>
+    <script src="js/cronometro.js"></script>
+    <script src="js/script.js"></script>
 </body>
-
 </html>
