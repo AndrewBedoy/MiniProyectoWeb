@@ -2,7 +2,10 @@
 let draggableObjects;
 let dropPoints;
 const startButton = document.getElementById("start");
-const result = document.getElementById("result");
+const ganar = document.getElementById("ganar");
+const nombre = document.getElementById("nombre");
+const puntuacion = document.getElementById("puntuacion");
+const tiempo = document.getElementById("cronometro");
 const controls = document.querySelector(".controls-container");
 const dragContainer = document.querySelector(".draggable-objects");
 const dropContainer = document.querySelector(".drop-points");
@@ -19,6 +22,11 @@ const data = [
     "Pato",
 ];
 let count = 0;
+let puntajeRonda = 0;
+
+var puntaje = localStorage.getItem("puntaje");
+puntaje = JSON.parse(puntaje); //Cadena JSON a JS
+if (puntaje == null) puntaje = [];
 
 //Reproduccion de sonido
 let incorrecto = new Audio("sonidos/Incorrecto.wav");
@@ -36,7 +44,10 @@ const randomValueGenerator = () => {
 // Pantalla de Ganador
 const stopGame = () => {
     controls.classList.remove("hide");
-    startButton.classList.remove("hide");
+    setTimeout(function () {
+        startButton.innerHTML = "Volver a jugar como " + document.getElementById("jugador").value;
+        startButton.classList.remove("hide");
+    }, 1500);
 };
 
 // Funciones Drag & Drop
@@ -49,7 +60,6 @@ function dragOver(e) {
     e.preventDefault();
 }
 
-
 // Evento Drop
 const drop = (e) => {
     e.preventDefault();
@@ -58,6 +68,7 @@ const drop = (e) => {
     // Obtener atributo personalizado
     const droppableElementData = e.target.getAttribute("data-id");
     if (draggedElementData === droppableElementData) {
+        puntajeRonda += 100;
         const draggedElement = document.getElementById(draggedElementData);
         // dropped class
         e.target.classList.add("dropped");
@@ -74,17 +85,25 @@ const drop = (e) => {
         count += 1;
         animal = new Audio("sonidos/" + draggedElementData + ".wav");
         animal.play();
-    }
-    else {
+    } else {
+        puntajeRonda -= 10;
         incorrecto.play();
     }
     // Ganar
     if (count >= 6) {
-        setTimeout( function () {
+        detenercronometro();
+        setTimeout(function () {
             victoria.play();
-            result.innerText = `¡Ganaste! Nombre del localstorage y puntuacion ¿Botón de ver clasificación o ir al menú o jugar otra vez?`;
+            ganar.innerText = `¡Ganaste!`;
             stopGame();
         }, 2000);
+        setTimeout(function () {
+            nombre.innerText = document.getElementById("jugador").value;
+        }, 2400);
+        setTimeout(function () {
+            puntuacion.innerText = `Tiempo: ${total()} Puntuación: ${puntajeRonda}`;
+        }, 2500);
+        guardarEnLocal();
     }
 };
 
@@ -146,5 +165,63 @@ startButton.addEventListener(
             element.addEventListener("dragover", dragOver);
             element.addEventListener("drop", drop);
         });
+
+        iniciarCronometro();
+        //Reiniciar etiquetas
+        ganar.innerHTML = "";
+        nombre.innerHTML = "";
+        puntuacion.innerHTML = "";
+        puntajeRonda = 0;
     })
 );
+
+function mostrarJuego() {
+    document.getElementById("registro").style.display = "none";
+    document.getElementById("juego").style.display = "block";
+}
+
+function guardarEnLocal() {
+    let jugador = document.getElementById("jugador").value;
+    nombre.innerHTML = jugador;
+
+    //El método stringify converte un valor a JSON. Recibe un objeto JS y devuelve un JSON
+    var puntos = JSON.stringify({
+        nombre: jugador,
+        puntuacion: puntajeRonda,
+    });
+
+    console.log("Puntos: " + puntos);
+    puntaje.push(puntos);
+    localStorage.setItem("puntaje", JSON.stringify(puntaje));
+}
+
+function mostrarPuntuacion() {
+    var indice = -1;
+    var puntaje = localStorage.getItem("puntaje");
+    puntaje = JSON.parse(puntaje); //Cadena JSON a JS
+
+    if (puntaje == null) puntaje = [];
+
+    var aLength = puntaje.length;
+
+    document.getElementById("tablaPuntaje").innerHTML = "";
+
+    var tabla =
+        "<tr><th>Nombre</th><th>Puntuación</th><th></tr>";
+    //Recuperar la información
+    for (var i in puntaje) {
+        //En libro se almacena la información de cada registro recuperado del JSON (puntaje)
+        var puntajePersonal = JSON.parse(puntaje[i]);
+        tabla += "<tr><td>" + puntajePersonal.nombre + "</td>";
+        tabla += "<td>" + puntajePersonal.puntuacion + "</td>";
+        tabla += "</tr>";
+    }
+
+    document.getElementById("tablaPuntaje").innerHTML = tabla;
+}
+
+/*
+    puntaje
+    puntaje.nombre
+    puntaje.puntuacion
+*/
