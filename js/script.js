@@ -46,6 +46,7 @@ const stopGame = () => {
     controls.classList.remove("hide");
     setTimeout(function () {
         startButton.innerHTML = "Volver a jugar como " + document.getElementById("jugador").value;
+        document.getElementById("clasificacion").classList.remove("hide");
         startButton.classList.remove("hide");
     }, 1500);
 };
@@ -83,8 +84,12 @@ const drop = (e) => {
             `<div>${draggedElementData.toUpperCase()}</div>`
         );
         count += 1;
-        animal = new Audio("sonidos/" + draggedElementData + ".wav");
-        animal.play();
+        nombreAnimal = new Audio("sonidos/nombresAnimales/" + draggedElementData + "_voz.mp3");
+        nombreAnimal.play();
+        setTimeout(function () {
+            animal = new Audio("sonidos/" + draggedElementData + ".wav");
+            animal.play();
+        }, 1000);
     } else {
         puntajeRonda -= 10;
         incorrecto.play();
@@ -149,6 +154,7 @@ startButton.addEventListener(
     "click",
     (startGame = async () => {
         controls.classList.add("hide");
+        document.getElementById("clasificacion").classList.add("hide");
         startButton.classList.add("hide");
         // Espera al creador
         await creator();
@@ -225,3 +231,7 @@ function mostrarPuntuacion() {
     puntaje.nombre
     puntaje.puntuacion
 */
+
+function terminarJuego() {
+    window.location.href = "index.html";
+}

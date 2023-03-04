@@ -13,18 +13,23 @@
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-    <div id="registro">
-        <div class="container text-center">
+    <audio src="media/A Day to Remember - FiftySounds.mp3" autoplay="true" loop id="cancion"></audio>
+    <div id="registro" hidden>
+        <div class="registro text-center">
             <h1>¡Hola!</h1>
             <h2>Ingresa tu nombre aquí</h3>
             <input type="text" class="text-bg-info" id="jugador">
-            <button onclick="mostrarJuego()">Comenzar juego</button>
+            <button onclick="mostrarJuego()">Aceptar</button>
         </div>
     </div>
-    <div id="juego" hidden>
+    <div id="juego">
         <div class="container">
-            <div style="position: absolute;left: 85%; top: 0; margin: 25px;">
-                <h1 id="cronometro">00.00.00</h1>    
+            <div class="control">
+                <button onclick="controlarMusica()" id="controlMusica">
+                    <i id="iconoMusica" class="fa-solid fa-volume-high"></i>
+                </button>
+                <button onclick="terminarJuego()" id="controlMusica"><i class="fa-solid fa-circle-xmark"></i></button>
+                <h1 id="cronometro">00.00.00</h1>
             </div>
             <h3>Arrastra y coloca el nombre a cada animalito de la granja</h3>
             <div class="draggable-objects"></div>
@@ -34,10 +39,14 @@
             <p id="ganar"></p>
             <p id="nombre"></p>
             <p id="puntuacion"></p>
-            <button id="start">Comienza Juego</button>
+            <button id="start">Comenzar juego</button>
+            <br>
+            <button id="clasificacion">Ver tabla de clasificación</button>
         </div>
     </div>
     <!-- Script -->
+    <script src="https://kit.fontawesome.com/ade620492b.js" crossorigin="anonymous"></script>
+    <script src="js/musica.js"></script>
     <script src="js/cronometro.js"></script>
     <script src="js/script.js"></script>
 </body>

@@ -5,11 +5,15 @@
     font-family: 'Tilt Neon', cursive;
 }
 
+h1, h2 {
+    color: white;
+}
+
 body {
     background-color: #8399f0;     
 }
 
-.container{
+.container, .registro{
     width: 90%;
     max-width: 75em;
     background-image: url("../img/granja.jpg");
@@ -30,7 +34,7 @@ h3{
     font-weight: 600;
     letter-spacing: 0.03em;
     line-height: 1.8em;
-    color: #010c39;
+    color: #fcfcfc;
 }
 
 .draggable-objects, .drop-points{
@@ -92,7 +96,18 @@ img {
     top: 0;
 }
 
-.controls-container button{
+.control {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    position: absolute;
+    width: 10%;
+    height: 16%;
+    left: 85%;
+    top: 0;
+    margin: 25px;
+}
+
+.controls-container button, .container .control button {
     font-size: 1.12em;
     padding: 0.8em 1em;
     border-radius: 0.2em;
@@ -101,6 +116,12 @@ img {
     color: #010c39;
     letter-spacing: 0.06em;
     cursor: pointer;
+    width: 45%;
+}
+
+.container .control button:hover {
+    background-color: #010c39;
+    color: white;
 }
 
 .controls-container p{
