@@ -24,10 +24,6 @@ const data = [
 let count = 0;
 let puntajeRonda = 0;
 
-var puntaje = localStorage.getItem("puntaje");
-puntaje = JSON.parse(puntaje); //Cadena JSON a JS
-if (puntaje == null) puntaje = [];
-
 //Reproduccion de sonido
 let incorrecto = new Audio("sonidos/Incorrecto.wav");
 let victoria = new Audio("sonidos/Victoria.wav");
@@ -187,50 +183,53 @@ function mostrarJuego() {
 }
 
 function guardarEnLocal() {
+    var puntaje = localStorage.getItem("puntaje");
+    puntaje = JSON.parse(puntaje); //Cadena JSON a JS
     let jugador = document.getElementById("jugador").value;
     nombre.innerHTML = jugador;
-
+    let time = total();
     //El método stringify converte un valor a JSON. Recibe un objeto JS y devuelve un JSON
     var puntos = JSON.stringify({
         nombre: jugador,
         puntuacion: puntajeRonda,
+        tiempo: time,
     });
 
-    console.log("Puntos: " + puntos);
-    puntaje.push(puntos);
-    localStorage.setItem("puntaje", JSON.stringify(puntaje));
-}
+    var indice=-1;
 
-function mostrarPuntuacion() {
-    var indice = -1;
-    var puntaje = localStorage.getItem("puntaje");
-    puntaje = JSON.parse(puntaje); //Cadena JSON a JS
-
-    if (puntaje == null) puntaje = [];
-
-    var aLength = puntaje.length;
-
-    document.getElementById("tablaPuntaje").innerHTML = "";
-
-    var tabla =
-        "<tr><th>Nombre</th><th>Puntuación</th><th></tr>";
-    //Recuperar la información
-    for (var i in puntaje) {
-        //En libro se almacena la información de cada registro recuperado del JSON (puntaje)
-        var puntajePersonal = JSON.parse(puntaje[i]);
-        tabla += "<tr><td>" + puntajePersonal.nombre + "</td>";
-        tabla += "<td>" + puntajePersonal.puntuacion + "</td>";
-        tabla += "</tr>";
+    if(puntaje == null){
+        //console.log("Entra nulo");
+        puntaje=[];
+        puntaje.push(puntos);
+        localStorage.setItem("puntaje", JSON.stringify(puntaje));
+    }else{
+        var bandera = 0;
+        for(var i in puntaje) {
+            var elemento = JSON.parse(puntaje[i]);
+            if(elemento.nombre == jugador){
+                bandera=1;
+                indice = i;
+            }
+        }
+        if(bandera==1){
+            if(elemento.tiempo > time){
+                //console.log("Entra editar");
+                puntaje[indice]=puntos;
+                localStorage.setItem("puntaje",JSON.stringify(puntaje));
+            }
+        }else{
+            //console.log("Entra nuevo");
+            puntaje.push(puntos);
+            localStorage.setItem("puntaje", JSON.stringify(puntaje));
+        }
     }
-
-    document.getElementById("tablaPuntaje").innerHTML = tabla;
 }
 
-/*
-    puntaje
-    puntaje.nombre
-    puntaje.puntuacion
-*/
+
+function cambiarPagina(pagina){
+    console.log("Entra cambiar pagina "+pagina);
+    location = pagina;
+}
 
 function terminarJuego() {
     window.location.href = "index.html";
