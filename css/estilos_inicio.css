@@ -12,7 +12,7 @@ body{
               -3px  1px 1px black,
                1px -3px 1px black;
 
-  color: rgb(255, 255, 32);
+  color: rgb(255, 218, 32);
   letter-spacing: 4px;
   text-align: center;
   padding-top: 80px;
@@ -20,6 +20,7 @@ body{
 
    #company{
     margin: 0 auto;
+    color:rgb(246, 172, 24) ;
    }
 
    #manzanita{
@@ -42,4 +43,36 @@ body{
     margin-left: auto;
     margin-top: 120px;
    }
+
+   .container{
+    color: rgb(255, 255, 255);
+    text-align: right;
+    width: 1700px;
+    height: 850px;
+    backdrop-filter: blur(20px);
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    font-family: 'Tilt Neon', cursive;
+   }
+
+   .container h1 {
+    text-align: right;
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .container p {
+    text-align: right;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .img-uaa img{
+    padding-left: 500px;
+    justify-content:right;
+    width: 500px;
+    height: 300px;
+  }
 

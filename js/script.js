@@ -9,6 +9,9 @@ const tiempo = document.getElementById("cronometro");
 const controls = document.querySelector(".controls-container");
 const dragContainer = document.querySelector(".draggable-objects");
 const dropContainer = document.querySelector(".drop-points");
+const juego=document.querySelector(".juego");
+const registro=document.querySelector(".registro");
+juego.classList.add("hide")
 const data = [
     "Caballo",
     "Vaca",
@@ -150,6 +153,7 @@ startButton.addEventListener(
     (startGame = async () => {
         controls.classList.add("hide");
         startButton.classList.add("hide");
+        registro.classList.add("hide");
         // Espera al creador
         await creator();
         count = 0;

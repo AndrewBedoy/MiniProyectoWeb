@@ -1,0 +1,25 @@
+header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-left {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-header{
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: rgb(241, 174, 20);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+.btn-header:hover {
+    background-color: rgb(167, 118, 4);
+    color: white;
+  }
