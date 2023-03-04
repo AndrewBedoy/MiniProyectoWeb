@@ -4,14 +4,8 @@ function controlarMusica() {
     if(can.paused) {
         reproducirMusica();
     }
-    else if(can.volume > 0.75) {
-        bajarMusica(0.75);
-    }
-    else if(can.volume > 0.5) {
-        bajarMusica(0.5);
-    }
-    else if(can.volume > .25) {
-        bajarMusica(0.25);
+    else if(can.volume > 0.25) {
+        bajarMusica(can.volume - .25);
     }
     else {
         detenerMusica();

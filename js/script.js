@@ -4,6 +4,8 @@ let dropPoints;
 const startButton = document.getElementById("start");
 const ganar = document.getElementById("ganar");
 const nombre = document.getElementById("nombre");
+const puntos = document.getElementById("puntos");
+const aciertoFallo = document.getElementById("aciertoFallo");
 const puntuacion = document.getElementById("puntuacion");
 const tiempo = document.getElementById("cronometro");
 const controls = document.querySelector(".controls-container");
@@ -24,6 +26,11 @@ const data = [
 let count = 0;
 let puntajeRonda = 0;
 
+let puntaje = localStorage.getItem("puntaje");
+    puntaje = JSON.parse(puntaje); //Cadena JSON a JS
+    if (puntaje == null) puntaje = [];
+
+
 //Reproduccion de sonido
 let incorrecto = new Audio("sonidos/Incorrecto.wav");
 let victoria = new Audio("sonidos/Victoria.wav");
@@ -42,7 +49,7 @@ const stopGame = () => {
     controls.classList.remove("hide");
     setTimeout(function () {
         startButton.innerHTML = "Volver a jugar como " + document.getElementById("jugador").value;
-        document.getElementById("clasificacion").classList.remove("hide");
+        document.getElementById("score").classList.remove("hide");
         startButton.classList.remove("hide");
     }, 1500);
 };
@@ -80,6 +87,11 @@ const drop = (e) => {
             `<div>${draggedElementData.toUpperCase()}</div>`
         );
         count += 1;
+        aciertoFallo.style.color = "green";
+            aciertoFallo.innerHTML = "+100";
+        setTimeout(function () {
+            aciertoFallo.innerHTML = "";
+        }, 1000);
         nombreAnimal = new Audio("sonidos/nombresAnimales/" + draggedElementData + "_voz.mp3");
         nombreAnimal.play();
         setTimeout(function () {
@@ -87,9 +99,15 @@ const drop = (e) => {
             animal.play();
         }, 1000);
     } else {
+        aciertoFallo.style.color = "red";
+        aciertoFallo.innerHTML = "-10";
+        setTimeout(function () {
+            aciertoFallo.innerHTML = "";
+        }, 1000);
         puntajeRonda -= 10;
         incorrecto.play();
     }
+    puntos.innerHTML = "Puntos: " + puntajeRonda;
     // Ganar
     if (count >= 6) {
         detenercronometro();
@@ -150,7 +168,7 @@ startButton.addEventListener(
     "click",
     (startGame = async () => {
         controls.classList.add("hide");
-        document.getElementById("clasificacion").classList.add("hide");
+        document.getElementById("score").classList.add("hide");
         startButton.classList.add("hide");
         // Espera al creador
         await creator();
@@ -178,13 +196,30 @@ startButton.addEventListener(
 );
 
 function mostrarJuego() {
+    let jugador = document.getElementById("jugador").value;
+    //Recuperar la información
+    if(puntaje.length == 0) {
+        puntuacion.innerHTML = "Juega para ver tu puntuación aquí";
+    }
+    else
+        for (var i in puntaje) {
+            //En libro se almacena la información de cada registro recuperado del JSON (libros)
+            var puntos = JSON.parse(puntaje[i]);
+            if(puntos.nombre == jugador){
+                puntuacion.innerHTML = "Tu mejor puntuación es de " + puntos.puntuacion + " en un tiempo de " + puntos.tiempo;
+                break;
+            }
+            else {
+                puntuacion.innerHTML = "Aún no has jugado. ¡Juega para registrar tu mejor tiempo!"
+            }
+        }
+
     document.getElementById("registro").style.display = "none";
     document.getElementById("juego").style.display = "block";
+    nombre.innerHTML = "¡Bienvenido, " + jugador + "!";
 }
 
 function guardarEnLocal() {
-    var puntaje = localStorage.getItem("puntaje");
-    puntaje = JSON.parse(puntaje); //Cadena JSON a JS
     let jugador = document.getElementById("jugador").value;
     nombre.innerHTML = jugador;
     let time = total();
